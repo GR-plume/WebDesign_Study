@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll-Page practice</title>
+</head>
+<body>
+    <div class="wrapper" id="wrap-1"><p>Content-1</p></div>
+    <div class="wrapper" id="wrap-2"><p>Content-2</p></div>
+    <div class="wrapper" id="wrap-3"><p>Content-3</p></div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <script src="scroll-page_practice.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        *::-webkit-scrollbar{
+            display: none;
+        }
+        body{
+            width: 100vw;
+        }
+        .wrapper{
+            width: 100vw;
+            height: 100vh;
+        }
+        #wrap-1{
+            background-color: lightblue;
+        }
+        #wrap-2{
+            background-color: lightcoral;
+        }
+        #wrap-3{
+            background-color: lightgreen;
+        }
+    </style>
+</body>
+</html>
