@@ -6,10 +6,20 @@
     <title>Scroll-Page practice</title>
 </head>
 <body>
-    <div class="wrapper" id="wrap-1"><p>Content-1</p></div>
+    <div class="wrapper" id="wrap-1">
+        <p>Content-1</p>
+        <div style="white-space: pre;margin: auto;width: 40px;height: 40px;top: 0;bottom: 0;left: 0;right: 0;">
+scroll
+  ↓
+  ↓
+  ↓
+  ↓
+  ↓
+  ↓
+        </div>
+    </div>
     <div class="wrapper" id="wrap-2"><p>Content-2</p></div>
     <div class="wrapper" id="wrap-3"><p>Content-3</p></div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
     <script src="scroll-page_practice.js"></script>
     <style>
         *{
@@ -18,6 +28,9 @@
         }
         *::-webkit-scrollbar{
             display: none;
+        }
+        html,body{
+            overflow: hidden;
         }
         body{
             width: 100vw;

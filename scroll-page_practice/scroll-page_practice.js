@@ -1,23 +1,58 @@
 (function(){
 
-    var pagenum = 1;
+var pageNum = 1;
 
-    window.addEventListener("resize",function(){
-        window.scroll({top:$(`#wrap-${pagenum}`).offset().top});
-    });
+function throttle(fn, _this, wait){
+    var time = Date.now();
+    return function(){
+      if ((time + wait - Date.now()) < 0) {
+        fn.apply(_this, arguments);
+        time = Date.now();
+      }
+    }
+};
 
-    $("[id^=wrap-]").on("wheel", function(e){
-        var deltaY = e.originalEvent.deltaY;
-        var wrapnow = $(this).prop("id").split("-")[1];
-        var vector = 1;
-        if(0 < deltaY){vector = 1}else{vector = -1};
-        if($(this).prop("id") === "wrap-1" && deltaY > 0||
-           $(this).prop("id") === "wrap-3" && deltaY < 0||
-           $(this).prop("id") === "wrap-2"){
-                var wrapnext = $(`#wrap-${Number(wrapnow) + vector}`).offset().top;
-                window.scroll({top:wrapnext,behavior:"smooth"});
-                pagenum = Number(wrapnow) + vector;
-        };
-    });
+function debounce(fn, _this, wait){
+    let timerId;
+    return () => {
+      clearTimeout(timerId);
+      timerId = setTimeout(() => {
+        fn.apply(_this, arguments);
+      }, wait);
+    }
+};
+
+function scrollFn(e){
+    var idnow = Number(e.target.getAttribute("id").slice(-1));
+    if(e.deltaY > 0){goDown(idnow,e)}else{goUp(idnow,e)};
+};
+
+function goUp(idnow){
+    var idnext = idnow - 1;
+    if(idnext != 0){
+        var windowHeight = window.innerHeight;
+        window.scrollBy({top:-windowHeight,behavior:"smooth"});
+        pageNum--;
+    }
+};
+
+function goDown(idnow){
+    var idnext = idnow + 1;
+    if(idnext != 4){
+        var windowHeight = window.innerHeight;
+        window.scrollBy({top:windowHeight,behavior:"smooth"});
+        pageNum++;
+    }
+};
+
+function resizeElement(){
+    var element = document.getElementById(`wrap-${pageNum}`);
+    var py = window.pageYOffset + element.getBoundingClientRect().top;
+    window.scroll({top:py});
+};
+
+document.addEventListener("mousewheel",throttle(scrollFn,this,600));
+
+window.addEventListener("resize",debounce(resizeElement,this,300));
 
 }());
